@@ -26,9 +26,10 @@ namespace XamarinGSYPlayer.Droid.Renderers
     {
         Context context;
         ViewGroup mainpage;
-        Com.Shuyu.Gsyvideoplayer.Utils.OrientationUtils orientationUtils;
+        OrientationUtils orientationUtils;
         StandardGSYVideoPlayer player;
         ImageView imageView;
+        bool fullscreen = false;
         public GSYPlayerRenderer(Context context) : base(context)
         {
             this.context = context;
@@ -44,9 +45,10 @@ namespace XamarinGSYPlayer.Droid.Renderers
                     player = new StandardGSYVideoPlayer(context);
                      var activity = (Activity)base.Context;
 
-                    orientationUtils = new Com.Shuyu.Gsyvideoplayer.Utils.OrientationUtils(activity, player);
+                    orientationUtils = new OrientationUtils(activity, player);
+                    player.SetThumbPlay(true);
 
-                    InitializePlayer(e.NewElement.Souce);
+                    InitializePlayer(e.NewElement.Source, e.NewElement.AutoPlay, e.NewElement.Thumbnail, e.NewElement.Title);
 
                     SetNativeControl(player);
                     
@@ -71,8 +73,23 @@ namespace XamarinGSYPlayer.Droid.Renderers
 
                         try
                         {
-                            orientationUtils.ResolveByClick();
 
+                            if (!fullscreen)
+                            {
+                                fullscreen = true;
+                                //activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
+
+                                var uiOptions = SystemUiFlags.HideNavigation | SystemUiFlags.ImmersiveSticky | SystemUiFlags.Fullscreen | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation;
+                                activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
+                            }
+                            else
+                            {
+                                fullscreen = false;
+                                //activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
+                                activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
+
+                            }
+                            orientationUtils.ResolveByClick();
                             player.StartWindowFullscreen(context, true, true);
 
                         }
@@ -86,15 +103,14 @@ namespace XamarinGSYPlayer.Droid.Renderers
                 }
 
             }
-        }
-
+        }        
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
         }
         protected override void Dispose(bool disposing)
         {
-
+            //OnSizeAllocated you can implent this after
 
             player.SetUp("", true, "");
             if(MainActivity.Instance.RequestedOrientation!= ScreenOrientation.Portrait)
@@ -103,17 +119,19 @@ namespace XamarinGSYPlayer.Droid.Renderers
             base.Dispose(disposing);
 
         }
-        private void InitializePlayer(string Source)
-        {
+        private void InitializePlayer(string Source, bool AutoPlay = true, string Thumbnail = "", string Title="")
+        {            
             imageView = new ImageView(context);
 
             imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
-            imageView.SetImageURI(Android.Net.Uri.Parse("https://hexoblogstorage.blob.core.windows.net/blogres/images/xamarin-custom-navbar-icon-text/navbardiff.png"));
+
+            imageView.SetImageURI(Android.Net.Uri.Parse(Thumbnail));
             player.ThumbImageView = imageView;
-            player.SetThumbPlay(true);
             player.VerticalScrollBarEnabled = false;
-            player.SetUp(Source, true, "Video");
-            //player.StartPlayLogic();
+            player.SetUp(Source, true, Title);
+            player.Looping = AutoPlay;
+            if(AutoPlay)
+            player.StartPlayLogic();
 
         }
 

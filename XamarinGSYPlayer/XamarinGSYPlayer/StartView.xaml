@@ -7,7 +7,7 @@
              x:Class="XamarinGSYPlayer.StartView">
     <ContentPage.Content>
         <StackLayout>
-            <Button Clicked="Button_Clicked" Text="Welcome to Xamarin.Forms!"
+            <Button Clicked="Button_Clicked" Text="GSYPlayer!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
