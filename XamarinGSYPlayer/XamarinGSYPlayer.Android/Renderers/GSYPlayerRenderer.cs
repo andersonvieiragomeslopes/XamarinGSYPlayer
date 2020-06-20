@@ -77,16 +77,16 @@ namespace XamarinGSYPlayer.Droid.Renderers
                             if (!fullscreen)
                             {
                                 fullscreen = true;
-                                //activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
+                                activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
 
-                                var uiOptions = SystemUiFlags.HideNavigation | SystemUiFlags.ImmersiveSticky | SystemUiFlags.Fullscreen | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation;
-                                activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
+                                //var uiOptions = SystemUiFlags.HideNavigation | SystemUiFlags.ImmersiveSticky | SystemUiFlags.Fullscreen | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation;
+                               // activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
                             }
                             else
                             {
                                 fullscreen = false;
-                                //activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
-                                activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
+                                activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
+                                //activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
 
                             }
                             orientationUtils.ResolveByClick();
