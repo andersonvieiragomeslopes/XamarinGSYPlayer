@@ -10,7 +10,7 @@ namespace XamarinGSYPlayer
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new StartView());
         }
 
         protected override void OnStart()

@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -41,9 +42,14 @@ namespace XamarinGSYPlayer.Droid.Renderers
                 if (Control == null)
                 {
                     player = new StandardGSYVideoPlayer(context);
+                     var activity = (Activity)base.Context;
+
+                    orientationUtils = new Com.Shuyu.Gsyvideoplayer.Utils.OrientationUtils(activity, player);
+
                     InitializePlayer(e.NewElement.Souce);
 
                     SetNativeControl(player);
+                    
                     player.BackButton.Click += (sender, e) =>
                     {
 
@@ -51,6 +57,7 @@ namespace XamarinGSYPlayer.Droid.Renderers
                         {
                             player.SetUp("", true, "");
                             player.OnBackFullscreen();
+                            activity.OnBackPressed();
 
 
                         }
@@ -64,8 +71,9 @@ namespace XamarinGSYPlayer.Droid.Renderers
 
                         try
                         {
-                            player.StartWindowFullscreen(context, true, true);
+                            orientationUtils.ResolveByClick();
 
+                            player.StartWindowFullscreen(context, true, true);
 
                         }
                         catch (Exception ex)
@@ -86,8 +94,12 @@ namespace XamarinGSYPlayer.Droid.Renderers
         }
         protected override void Dispose(bool disposing)
         {
-            player?.Dispose();
-            player = null;
+
+
+            player.SetUp("", true, "");
+            if(MainActivity.Instance.RequestedOrientation!= ScreenOrientation.Portrait)
+            MainActivity.Instance.RequestedOrientation = ScreenOrientation.Portrait;
+
             base.Dispose(disposing);
 
         }
@@ -98,9 +110,10 @@ namespace XamarinGSYPlayer.Droid.Renderers
             imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
             imageView.SetImageURI(Android.Net.Uri.Parse("https://hexoblogstorage.blob.core.windows.net/blogres/images/xamarin-custom-navbar-icon-text/navbardiff.png"));
             player.ThumbImageView = imageView;
+            player.SetThumbPlay(true);
             player.VerticalScrollBarEnabled = false;
             player.SetUp(Source, true, "Video");
-            player.StartPlayLogic();
+            //player.StartPlayLogic();
 
         }
 
