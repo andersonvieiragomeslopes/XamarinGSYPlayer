@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinGSYPlayer.Android", "XamarinGSYPlayer\XamarinGSYPlayer.Android\XamarinGSYPlayer.Android.csproj", "{38FEF3CB-30F8-44D6-B163-46A1B5D1CB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinGSYPlayer", "XamarinGSYPlayer\XamarinGSYPlayer\XamarinGSYPlayer.csproj", "{8C1C3D41-4174-4E6A-A45D-517F53055A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinGSYPlayer", "XamarinGSYPlayer\XamarinGSYPlayer\XamarinGSYPlayer.csproj", "{8C1C3D41-4174-4E6A-A45D-517F53055A95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSYVideoPlayer", "GSYVideoPlayer\GSYVideoPlayer.csproj", "{EF1BEEC9-B69B-48DD-BE7B-C4D2DE008102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{8C1C3D41-4174-4E6A-A45D-517F53055A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C1C3D41-4174-4E6A-A45D-517F53055A95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C1C3D41-4174-4E6A-A45D-517F53055A95}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EF1BEEC9-B69B-48DD-BE7B-C4D2DE008102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1BEEC9-B69B-48DD-BE7B-C4D2DE008102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1BEEC9-B69B-48DD-BE7B-C4D2DE008102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1BEEC9-B69B-48DD-BE7B-C4D2DE008102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
