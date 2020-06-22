@@ -54,6 +54,8 @@ namespace Plugin.GSYVideoPlayer.Platforms.Android
                         try
                         {
                             player.SetUp("", true, "");
+                            if (activity.RequestedOrientation != ScreenOrientation.Portrait)
+                                activity.RequestedOrientation = ScreenOrientation.Portrait;
                             player.OnBackFullscreen();
                             activity.OnBackPressed();
 
@@ -74,15 +76,11 @@ namespace Plugin.GSYVideoPlayer.Platforms.Android
                             {
                                 fullscreen = true;
                                 activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
-
-                                //var uiOptions = SystemUiFlags.HideNavigation | SystemUiFlags.ImmersiveSticky | SystemUiFlags.Fullscreen | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation;
-                                // activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
                             }
                             else
                             {
                                 fullscreen = false;
                                 activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
-                                //activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
 
                             }
                             orientationUtils.ResolveByClick();
@@ -107,12 +105,16 @@ namespace Plugin.GSYVideoPlayer.Platforms.Android
         protected override void Dispose(bool disposing)
         {
             //OnSizeAllocated you can implent this after
+            var activity = (Activity)base.Context;
 
-            player.SetUp("", true, "");
-            //if (MainActivity.Instance.RequestedOrientation != ScreenOrientation.Portrait)
-            //    MainActivity.Instance.RequestedOrientation = ScreenOrientation.Portrait;
-
-            base.Dispose(disposing);
+            player.SetUp("", true, "");            
+            if (activity.RequestedOrientation != ScreenOrientation.Portrait)
+                activity.RequestedOrientation = ScreenOrientation.Portrait;
+            //activity.OnBackPressed();
+            player.OnVideoPause();
+            player.Release();
+            player.Dispose();
+            //base.Dispose(disposing);
 
         }
         private void InitializePlayer(string Source, bool AutoPlay = true, string Thumbnail = "", string Title = "")
@@ -127,7 +129,6 @@ namespace Plugin.GSYVideoPlayer.Platforms.Android
             if (AutoPlay)
                 player.StartPlayLogic();
 
-        }
-
+        }        
     }
 }

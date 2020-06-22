@@ -34,19 +34,30 @@
     <RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
     <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
     <PackageIconUrl>ICON URL</PackageIconUrl>
-    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, GSYVideoPlayer</PackageTags>
+    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, GSYVideoPlayer, xamarin video player, xamarin player, xamarin video</PackageTags>
     
     <Title>GSYVideoPlayer Plugin for Xamarin and Windows</Title>
     <Summary>Summary of nuget</Summary>
-    <Description>Plugin Description</Description>
+    <Description>The plugin aims to play videos, xamarin.forms =&gt; 4.6.0.967 is required
+Xamarin.AndroidX
+It is not necessary to start in MainActivity.
+
+The source code is available, if you have suggestions or improvements to propose, I appreciate a PR.
+Enjoy :)
+
+https://github.com/CarGuo/GSYVideoPlayer</Description>
     
     
     <Owners>YOU</Owners>
-    <Authors>YOU</Authors>
-    <Copyright>Copyright 2019</Copyright>
+    <Authors>Anderson Vieira Gomes Lopes</Authors>
+    <Copyright>Copyright 2020</Copyright>
 
     <!--When built in 2019 will remove extra references on pack-->
     <DisableExtraReferences>true</DisableExtraReferences>
+    <Company>Anderson Vieira Gomes Lopes</Company>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>false</SignAssembly>
     
   </PropertyGroup>
 
